@@ -7,7 +7,7 @@ const AboutPage = () => {
   return (
     <Layout pageTitle="About Me">
         <p>Hi there! I'm the proud creator of this site, which I built with Gatsby.</p>
-        <StaticImage src="../images/profile.jpg" alt="A picture of an alien that kind of looks like me"
+        <StaticImage src="../images/profile.jpg" alt="A picture of an alien that kind of looks like me"/>
     </Layout>
   )
 }
