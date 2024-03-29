@@ -8,7 +8,7 @@ import {
   navLinkText,
   siteTitle 
 } from './layout.module.css'
-import { useMetadata } from '../../api'
+import { useMetadata } from '../../hooks'
 
 const Layout = ({ pageTitle, children }) => {
   const metadata = useMetadata()

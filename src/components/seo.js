@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMetadata } from '../api';
+import { useMetadata } from '../hooks';
 
 const Seo = ({title}) => {
     const metadata = useMetadata()
