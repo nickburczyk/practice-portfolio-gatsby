@@ -8,7 +8,7 @@ const BlogPage = ({ data }) => {
     <Layout pageTitle="My Blog Posts">
       <ul>
         {data.allFile.nodes.map(node => (
-          <li>{node.name}</li>
+          <li key={node.name}>{node.name}</li>
         ))}
       </ul>
     </Layout>
