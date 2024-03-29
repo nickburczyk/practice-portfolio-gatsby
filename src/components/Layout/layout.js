@@ -1,14 +1,33 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import { container, heading, navLinks, navLinkItem, navLinkText } from './layout.module.css'
+import { 
+  container, 
+  heading, 
+  navLinks, 
+  navLinkItem, 
+  navLinkText,
+  siteTitle 
+} from './layout.module.css'
+import { useMetadata } from '../../api'
 
 const Layout = ({ pageTitle, children }) => {
+  const metadata = useMetadata()
+
   return (
     <div className={container}>
+      <header className={siteTitle}>{metadata.title}</header>
       <nav>
         <ul className={navLinks}>
-          <li className={navLinkItem}><Link to="/" className={navLinkText}>Home</Link></li>
-          <li><Link to="/about">About</Link></li>
+          <li className={navLinkItem}>
+            <Link to="/" className={navLinkText}>
+              Home
+            </Link>
+          </li>
+          <li className={navLinkItem}>
+            <Link to="/about" className={navLinkText}>
+              About
+            </Link>
+          </li>
         </ul>
       </nav>
       <main>
