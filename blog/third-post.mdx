@@ -1,0 +1,96 @@
+---
+title: "My Third Blog Post"
+date: "2024-03-29"
+slug: "third-post"
+---
+
+# Writing your first React Hook...
+
+React hooks are incredibly helpful. We use them already inside a component in the form of
+`useState()` or `useEffect()`.
+
+```jsx
+import React, { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>You've clicked {count} times.</h1>
+      <button onClick={() => setCount(count + 1)}>Click to increase</button>
+      <button onClick={() => setCount(count - 1)}>Click to decrease</button>
+    </>
+  );
+};
+```
+
+But did you know you can hide stateful changes in a react hook of your own design? This can help
+keep your components clean and un-bloated.
+
+In the example above, you have a heading with the count and two buttons to increase and decrease the count.
+
+But if you moved the count state to a hook, your code can be cleaner.
+
+```jsx
+// useCount.js
+
+import React, { useState } from "react";
+
+// when naming hooks, always begin them with the "use" keyword.
+const useCount = (initialCount = 0) => {
+  const [count, setCount] = useState(initialCount);
+
+  const increase = () => setCount((prev) => prev + 1);
+  const decrease = () => setCount((prev) => prev + 1);
+
+  return {
+    count,
+    increase,
+    decrease,
+  };
+};
+```
+
+Here, we have:
+
+- created a hook `useCount` (it is important that your hook names start with `use`)
+- allowed the user to determine what the initial value should be (but will use 0 as a default if
+  nothing is passed,
+- used the same useState method to track state,
+- created functions that increase and decrease the count
+- given them more intuitive names to use in your component.
+
+Here is what it would look like to implement it:
+
+```jsx
+import React from "react";
+import { useCount } from "./useCount";
+
+const Counter = () => {
+  const { count, increase, decrease } = useCount();
+
+  return (
+    <>
+      <h1>You've clicked {count} times.</h1>
+      <button onClick={increase}>Click to increase</button>
+      <button onClick={decrease}>Click to decrease</button>
+    </>
+  );
+};
+```
+
+This is a minor upgrade in such a small component, but you can already see how much more readable
+this component has become. Here are the important changes:
+
+- We destructure the new functions from our `useCount` hook.
+- We have passed the new functions into the button's `onClick` handlers
+  - There is no need to "invoke" the function here with `()=>increase()` as there was before,
+    because what is being passed is already a function ready to be invoked when you click.
+- We have cleaned up syntax that requires extra cognitive effort to decipher
+
+While this is not a huge optimization because of the size of these components, the utility in
+bigger applications can make great gains. Hooks are great for API calls, manipulating data you
+will need in the component, or control something bigger like logged in status.
+
+The only way to get better at coding is to code a lot. Go try it out!
