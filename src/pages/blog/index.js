@@ -1,19 +1,35 @@
 import * as React from 'react'
 import Layout from '../../components/Layout/layout'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import Seo from '../../components/seo'
 
-const BlogPage = ({ data }) => {
+const BlogPage = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allMdx {
+        nodes {
+          frontmatter {
+            title
+            date(fromNow: true)
+            slug
+          }
+          id
+          excerpt
+        }
+      }
+    }
+  `)
   const posts = data?.allMdx?.nodes
 
   return (
     <Layout pageTitle="My Blog Posts">
       {posts?.map(post => (
         <article>
-          <h4 key={post.id}>
-            {post?.frontmatter?.title} - &nbsp;
-            {post?.frontmatter?.date}
-          </h4>
+          <h2>
+            <Link to={`/blog/${post.frontmatter.slug}`}>
+              {post.frontmatter.title}
+            </Link>
+          </h2>
           <p>
             {post?.excerpt}
           </p>
@@ -24,8 +40,8 @@ const BlogPage = ({ data }) => {
 }
 
 const query = graphql`
-  query GetBlogPosts {
-    allMdx (sort: {frontmatter: {date: DESC}}) {
+  query {
+    allMdx {
       nodes {
         frontmatter {
           title
@@ -38,6 +54,7 @@ const query = graphql`
   }
 `
 
-export const Head = () => <Seo title="My Blog Posts" />
+export const Head = () => 
+  <Seo title="My Blog Posts" />
 
 export default BlogPage
