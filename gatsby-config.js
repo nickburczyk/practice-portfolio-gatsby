@@ -10,7 +10,11 @@ module.exports = {
     "gatsby-plugin-image", 
     "gatsby-plugin-sitemap", 
     "gatsby-plugin-sharp", 
-    "gatsby-transformer-sharp", 
+    "gatsby-plugin-mdx",
+    "gatsby-remark-images",
+    "gatsby-remark-prismjs",
+    "gatsby-remark-autolink-headers", 
+    "gatsby-transformer-sharp",
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
