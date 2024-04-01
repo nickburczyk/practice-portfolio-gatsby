@@ -6,7 +6,7 @@ import Seo from '../../components/seo'
 const BlogPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allMdx {
+      allMdx(sort: { frontmatter: { date: DESC }}) {
         nodes {
           frontmatter {
             title
@@ -39,20 +39,21 @@ const BlogPage = () => {
   )
 }
 
-const query = graphql`
-  query {
-    allMdx {
-      nodes {
-        frontmatter {
-          title
-          date(fromNow: true)
-        }
-        id
-        excerpt
-      }
-    }
-  }
-`
+// TODO: Make this query work as a page query
+// const query = graphql`
+//   query {
+//     allMdx {
+//       nodes {
+//         frontmatter {
+//           title
+//           date(fromNow: true)
+//         }
+//         id
+//         excerpt
+//       }
+//     }
+//   }
+// `
 
 export const Head = () => 
   <Seo title="My Blog Posts" />
